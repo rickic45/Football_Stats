@@ -40,8 +40,8 @@ navBtns.forEach(btn => {
     currentView = btn.dataset.view;
     grpOpponent.style.display = currentView === 'head2head' ? 'flex' : 'none';
     document.getElementById('grp-season').style.display = currentView === 'head2head' ? 'none' : 'flex';
-    showWelcome();
 
+    // Se clicco su Preferiti, carica direttamente la lista e nascondi i controlli
     if (currentView === 'favorites') {
       document.getElementById('controls').style.display = 'none';
       renderFavorites();
@@ -107,11 +107,6 @@ async function fetchView(view, league, team, opponent, season) {
 }
 
 /* ── RENDER: INFO ────────────────────────────────── */
-function renderInfo(d, teamSlug) {
-  const c = d.club || {};
-  const s = d.stadio || {};
-}
-
 async function renderInfo(d, teamSlug) {
   const c = d.club || {};
   const s = d.stadio || {};
@@ -337,7 +332,6 @@ function formatDate(s) {
   return `${d}/${m}/${y}`;
 }
 function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 
 /* ── FAVORITES ──────────────────────────────────── */
 async function toggleFavorite(league, team, btn) {
@@ -349,7 +343,7 @@ async function toggleFavorite(league, team, btn) {
   const data = await res.json();
   const aggiunta = data.azione === 'aggiunta';
   btn.textContent = aggiunta ? '★ Preferita' : '☆ Aggiungi ai preferiti';
-  btn.style.color = aggiunta ? 'var(--accent)' : '';
+  btn.style.color = aggiunta ? 'var(--accent)' : 'var(--muted)';
 }
 
 async function renderFavorites() {
