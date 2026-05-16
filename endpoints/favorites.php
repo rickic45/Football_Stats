@@ -19,19 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Cerca se già presente
-    $trovato = -1;
+    $esiste = false;
     foreach ($preferiti as $i => $p) {
         if ($p['league'] === $league && $p['team'] === $team) {
-            $trovato = $i;
+            array_splice($preferiti, $i, 1);
+            $esiste = true;
             break;
         }
     }
-
-    if ($trovato !== -1) {
-        array_splice($preferiti, $trovato, 1);
+    
+    if ($esiste) {
         $azione = 'rimossa';
     } else {
-        $preferiti[] = ['league' => $league, 'team' => $team];
+        $preferiti[] = ['league' => $league, team' => $team];
         $azione = 'aggiunta';
     }
 
