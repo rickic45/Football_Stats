@@ -104,7 +104,15 @@ if (!$h2h) {
 }
  
 // Ordina per data crescente
-usort($h2h, fn($a, $b) => strcmp($a['fixture']['date'], $b['fixture']['date']));
+for ($i = 0; $i < count($partite) - 1; $i++) {
+    for ($j = 0; $j < count($partite) - $i - 1; $j++) {
+        if ($partite[$j]['data'] > $partite[$j + 1]['data']) {
+            $temp = $partite[$j];
+            $partite[$j] = $partite[$j + 1];
+            $partite[$j + 1] = $temp;
+        }
+    }
+}
  
 // Mappa ogni partita
 $partite = [];
