@@ -31,8 +31,8 @@ function chiama_api($endpoint) {
     return $dati;
 }
  
-$method = $_SERVER['REQUEST_METHOD'];
-if ($method !== 'GET') {
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
     echo json_encode(["error" => "Metodo non consentito"]);
     exit;
